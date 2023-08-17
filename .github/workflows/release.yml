@@ -2,12 +2,12 @@ name: Manage release branch
 
 on:
   release:
-    types: [released]
+    types: [published]
   deployment_status:
 
 jobs:
   create_release_branch:
-    if: github.event_name == 'release' && github.event.release.draft == false  && github.event.release.prerelease == false
+    if: github.event_name == 'release'
     name: Create release branch
     runs-on: ubuntu-latest
     steps:
