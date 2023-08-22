@@ -8,7 +8,7 @@ on:
 jobs:
   create_release_branch:
     if: github.event_name == 'release' && github.event.release.draft == false  && github.event.release.prerelease == false
-    name: Create release branch
+    name: Create release branch from tag
     runs-on: ubuntu-latest
     steps:
       -
@@ -26,12 +26,13 @@ jobs:
 
   clean_up:
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
-    name: Remove release branch
+    name: Clean up on successful deployment
     runs-on: ubuntu-latest
     steps:
       -
         uses: actions/checkout@v3
       -
+        name: Remove release branch
         env:
           GH_TOKEN: ${{ secrets.PAT }}
         run: |
@@ -40,3 +41,11 @@ jobs:
           git config user.email actions@github.com
           git remote set-url origin https://${GH_TOKEN}@github.com/${{ github.repository }}
           git push origin :refs/heads/${{ github.event.deployment.ref }} && echo "Removed branch ${{ github.event.deployment.ref }}" >> "$GITHUB_STEP_SUMMARY"
+      -
+        uses: otto-de/purge-deprecated-workflow-runs@v1
+        name: Remove the skipped workflow runs
+        with:
+          token: ${{ secrets.PAT }}
+          remove-obsolete: false
+          remove-skipped: |
+            Manage release branch
