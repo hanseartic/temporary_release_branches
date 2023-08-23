@@ -7,7 +7,7 @@ on:
 
 jobs:
   create_release_branch:
-    if: github.event_name == 'release' && github.event.release.draft == false  && github.event.release.prerelease == false
+    if: github.event_name == 'release' && github.event.release.draft == false && github.event.release.prerelease == false
     name: Create release branch from tag
     runs-on: ubuntu-latest
     steps:
@@ -48,4 +48,4 @@ jobs:
           token: ${{ secrets.PAT }}
           remove-obsolete: false
           remove-skipped: |
-            Manage release branch
+            ${{ github.workflow }}
