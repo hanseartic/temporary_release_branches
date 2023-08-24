@@ -20,8 +20,7 @@ Therefore a secret named `PAT` (in this case) needs to be configured in the repo
 
 For showcasing, this repo has an environment named `release` configured to be deployable from branches following the pattern `v*.*.*`.
 
-
-![release-branches480](https://github.com/hanseartic/temporary_release_branches/assets/1752217/30c03e48-fa34-4f96-9c67-876af9df9008)
+![release flow](https://github.com/hanseartic/temporary_release_branches/assets/1752217/6d38e265-2e99-4dbb-8d3a-e76c8e540340)
 
 [blog post]: https://github.blog/changelog/2023-08-10-actions-runs-triggered-from-tags-or-forks-with-the-same-name-as-a-protected-branch-will-now-be-blocked/
 [PAT]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
